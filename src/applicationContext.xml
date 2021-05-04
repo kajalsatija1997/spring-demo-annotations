@@ -8,7 +8,10 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
    
     <!-- add entry to enable component scanning --> 	 	
-	<context:component-scan base-package="com.springLessons.springdemo"></context:component-scan>
+	<context:component-scan base-package="com.springLessons.springAssessmentDI"></context:component-scan>
+	
+	<!-- add entry to fetch Properties file -->
+	<context:property-placeholder location="classpath:sport.properties"/> 
 
 </beans>
 

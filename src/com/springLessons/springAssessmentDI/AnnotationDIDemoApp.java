@@ -1,8 +1,8 @@
-package com.springLessons.springdemo;
+package com.springLessons.springAssessmentDI;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class AnnotationDemoApp {
+public class AnnotationDIDemoApp {
 
 	public static void main(String[] args) {
 
@@ -14,18 +14,13 @@ public class AnnotationDemoApp {
 		/* Coach theCoach= context.getBean("thatSillyCoach",Coach.class); */
 		
 		//For default bean id 
-		TennisCoach theCoach= context.getBean("tennisCoach",TennisCoach.class);
+		Coach theCoach= context.getBean("swimCoach",Coach.class);
 		
 		//Display method on the beans
 		System.out.println(theCoach.getDailyWorkout());
 		
 		//Display getDailyFortune method with autowiring -DI
 		System.out.println(theCoach.getDailyFortune());
-		
-		//Calling property file values
-		System.out.println(theCoach.getEmail());
-		
-		System.out.println(theCoach.getTeam());
 		
 		//close the context
 		context.close();
