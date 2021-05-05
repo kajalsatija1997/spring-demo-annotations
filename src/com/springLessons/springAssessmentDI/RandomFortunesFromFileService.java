@@ -9,8 +9,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 /**
@@ -26,7 +29,8 @@ public class RandomFortunesFromFileService implements FortuneService {
 	// create a random number generator
 	private Random myRandom = new Random();
 	
-	public RandomFortunesFromFileService() {
+	@PostConstruct
+	public void readFileOnStartup() {
 
 		File theFile = new File(fileName);
 		
@@ -49,6 +53,12 @@ public class RandomFortunesFromFileService implements FortuneService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Iterator<String> itr=theFortunes.iterator();
+		while(itr.hasNext())
+		{
+			System.out.println(itr.next());
+		}
+		System.out.println("File read successfully.");
 	}
 
 	@Override

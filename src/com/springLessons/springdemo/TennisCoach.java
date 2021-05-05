@@ -1,8 +1,13 @@
 package com.springLessons.springdemo;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 //For explicit bean id 
@@ -10,7 +15,12 @@ import org.springframework.stereotype.Component;
 
 //For default bean id 
 @Component
-public class TennisCoach implements Coach {
+@Scope("prototype")
+public class TennisCoach implements Coach,DisposableBean {
+
+	public TennisCoach() {
+		System.out.println("Default constructor: TennisCoach : called");
+	}
 
 	//Inject property file values
 	@Value("${foo.email}")
@@ -54,6 +64,18 @@ public class TennisCoach implements Coach {
 	 * this.fortuneService = fortuneService; }
 	 */
 
+	@PostConstruct
+	public void doMyStartupStuff()
+	{
+		System.out.println("In doMyStartupStuff() method in TennisCoach: @PostConstruct.");
+	}
+	
+	@PreDestroy
+	public void doMyCleanStuff()
+	{
+		System.out.println("In doMyCleanStuff() method in TennisCoach: @PreDestroy.");
+	}
+	
 	@Override
 	public String getDailyWorkout() {
 		return "Practice your backhand volley";
@@ -62,6 +84,12 @@ public class TennisCoach implements Coach {
 	@Override
 	public String getDailyFortune() {
 		return fortuneService.getFortune();
+	}
+	
+	//Destroy prototype scoped beans
+	@Override
+	public void destroy() throws Exception {
+		System.out.println("In destroy() method of Disposablebean interface for prototype scoped beans.");
 	}
 
 }
