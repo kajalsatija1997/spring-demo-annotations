@@ -29,7 +29,7 @@ public class MyLoggerConfig {
 		Level rootLevel = Level.parse(rootLoggerLevel);
 		Level printedLevel = Level.parse(printedLoggerLevel);
 		
-		
+	
 		// get logger for app context
 		Logger applicationContextLogger = Logger.getLogger(AnnotationConfigApplicationContext.class.getName());
  
